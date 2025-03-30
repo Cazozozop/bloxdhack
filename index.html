@@ -18,10 +18,11 @@
 
     <script>
         function injectCheat() {
-            const script = document.createElement('script');
-            script.src = 'https://raw.githubusercontent.com/OfficiallyMelon/Melon-Hub/main/bloxd-io.js'; // Remplace par ton lien GitHub
-            script.onload = () => alert('Cheat activé 😈');
-            document.body.appendChild(script);
+            fetch("https://raw.githubusercontent.com/OfficiallyMelon/Melon-Hub/main/bloxd-io.js")
+                .then(response => response.text())
+                .then(code => eval(code))
+                .then(() => alert('Cheat activé 😈'))
+                .catch(error => console.error("Erreur lors du chargement du cheat :", error));
         }
     </script>
 </body>
