@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Bloxd.io Hacked</title>
+    <title>Bloxd.io - Troll Site</title>
     <style>
         body { text-align: center; background-color: #111; color: white; font-family: Arial, sans-serif; }
         iframe { width: 90vw; height: 80vh; border: none; margin-top: 20px; }
@@ -11,18 +11,24 @@
     </style>
 </head>
 <body>
-    <h1>Bloxd.io x Melon Hub</h1>
-    <button onclick="injectCheat()">Execute Melon Hub</button>
+    <h1>Bloxd.io avec un petit bonus 😈</h1>
+    <button onclick="injectCheat()">Exécuter le Troll</button>
     <br>
     <iframe id="gameFrame" src="https://bloxd.io"></iframe>
 
     <script>
         function injectCheat() {
-            fetch("https://raw.githubusercontent.com/Cazozozop/bloxdhack/main/bloxd-io.js")
-                .then(response => response.text())
-                .then(code => eval(code))
-                .then(() => alert('Cheat activated'))
-                .catch(error => console.error("Erreur lors du chargement du cheat :", error));
+            const iframe = document.getElementById("gameFrame").contentWindow;
+            if (!iframe) {
+                alert("Impossible d'accéder à l'iframe 😢");
+                return;
+            }
+
+            const script = document.createElement("script");
+            script.src = "https://raw.githubusercontent.com/OfficiallyMelon/Melon-Hub/main/bloxd-io.js"; // Remplace par ton lien GitHub
+            script.onload = () => alert("Cheat activé sur Bloxd.io 😈");
+
+            iframe.document.body.appendChild(script);
         }
     </script>
 </body>
