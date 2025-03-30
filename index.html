@@ -6,29 +6,32 @@
     <title>Bloxd.io - Troll Site</title>
     <style>
         body { text-align: center; background-color: #111; color: white; font-family: Arial, sans-serif; }
-        iframe { width: 90vw; height: 80vh; border: none; margin-top: 20px; }
         button { padding: 10px 20px; font-size: 18px; margin-top: 20px; cursor: pointer; }
     </style>
 </head>
 <body>
     <h1>Bloxd.io avec un petit bonus 😈</h1>
-    <button onclick="injectCheat()">Exécuter le Troll</button>
-    <br>
-    <iframe id="gameFrame" src="https://bloxd.io"></iframe>
+    <button onclick="openAndInject()">Lancer Bloxd.io + Cheat</button>
 
     <script>
-        function injectCheat() {
-            const iframe = document.getElementById("gameFrame").contentWindow;
-            if (!iframe) {
-                alert("Impossible d'accéder à l'iframe 😢");
-                return;
-            }
+        function openAndInject() {
+            let gameWindow = window.open("https://bloxd.io", "_blank");
 
-            const script = document.createElement("script");
-            script.src = "https://raw.githubusercontent.com/OfficiallyMelon/Melon-Hub/main/bloxd-io.js"; // Remplace par ton lien GitHub
-            script.onload = () => alert("Cheat activé sur Bloxd.io 😈");
+            setTimeout(() => {
+                if (!gameWindow) {
+                    alert("Active les pop-ups et réessaie !");
+                    return;
+                }
 
-            iframe.document.body.appendChild(script);
+                gameWindow.document.write(`
+                    <script>
+                        fetch("https://raw.githubusercontent.com/OfficiallyMelon/Melon-Hub/main/bloxd-io.js")
+                            .then(response => response.text())
+                            .then(code => eval(code))
+                            .catch(error => console.error("Erreur lors du chargement du cheat :", error));
+                    <\/script>
+                `);
+            }, 2000); // On attend 2 secondes pour être sûr que la page charge
         }
     </script>
 </body>
